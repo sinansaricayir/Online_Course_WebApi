@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TeknoAkademiDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Egitmen">
+    <Key>
+      <PropertyRef Name="egitmenId" />
+    </Key>
+    <Property Name="egitmenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="egitmenAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="egitmenSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="egitmenBrans" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="egitmenOzgecmis" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="egitmenFotograf" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kategoriAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kurslar">
+    <Key>
+      <PropertyRef Name="kursId" />
+    </Key>
+    <Property Name="kursId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kursAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kursFiyat" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="kursIcerik" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="kursKategoriId" Type="int" Nullable="false" />
+    <Property Name="kursEgitmenId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Uye">
+    <Key>
+      <PropertyRef Name="uyeId" />
+    </Key>
+    <Property Name="uyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uyeAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="uyeSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="uyeTel" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="uyeMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="uyeParola" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="uyeYetki" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Kurslar_EgitmenKurs">
+    <End Role="Egitmen" Type="Self.Egitmen" Multiplicity="1" />
+    <End Role="Kurslar" Type="Self.Kurslar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Egitmen">
+        <PropertyRef Name="egitmenId" />
+      </Principal>
+      <Dependent Role="Kurslar">
+        <PropertyRef Name="kursEgitmenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kurslar_KategoriKurs">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Kurslar" Type="Self.Kurslar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="kategoriId" />
+      </Principal>
+      <Dependent Role="Kurslar">
+        <PropertyRef Name="kursKategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TeknoAkademiDbModelStoreContainer">
+    <EntitySet Name="Egitmen" EntityType="Self.Egitmen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kurslar" EntityType="Self.Kurslar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Uye" EntityType="Self.Uye" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Kurslar_EgitmenKurs" Association="Self.FK_Kurslar_EgitmenKurs">
+      <End Role="Egitmen" EntitySet="Egitmen" />
+      <End Role="Kurslar" EntitySet="Kurslar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kurslar_KategoriKurs" Association="Self.FK_Kurslar_KategoriKurs">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Kurslar" EntitySet="Kurslar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

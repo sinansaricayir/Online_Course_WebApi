@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TeknoAkademiDbModelStoreContainer" CdmEntityContainer="TeknoAkademiDbEntities">
+    <EntitySetMapping Name="Egitmen">
+      <EntityTypeMapping TypeName="TeknoAkademiDbModel.Egitmen">
+        <MappingFragment StoreEntitySet="Egitmen">
+          <ScalarProperty Name="egitmenId" ColumnName="egitmenId" />
+          <ScalarProperty Name="egitmenAd" ColumnName="egitmenAd" />
+          <ScalarProperty Name="egitmenSoyad" ColumnName="egitmenSoyad" />
+          <ScalarProperty Name="egitmenBrans" ColumnName="egitmenBrans" />
+          <ScalarProperty Name="egitmenOzgecmis" ColumnName="egitmenOzgecmis" />
+          <ScalarProperty Name="egitmenFotograf" ColumnName="egitmenFotograf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategori">
+      <EntityTypeMapping TypeName="TeknoAkademiDbModel.Kategori">
+        <MappingFragment StoreEntitySet="Kategori">
+          <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+          <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kurslar">
+      <EntityTypeMapping TypeName="TeknoAkademiDbModel.Kurslar">
+        <MappingFragment StoreEntitySet="Kurslar">
+          <ScalarProperty Name="kursId" ColumnName="kursId" />
+          <ScalarProperty Name="kursAd" ColumnName="kursAd" />
+          <ScalarProperty Name="kursFiyat" ColumnName="kursFiyat" />
+          <ScalarProperty Name="kursIcerik" ColumnName="kursIcerik" />
+          <ScalarProperty Name="kursKategoriId" ColumnName="kursKategoriId" />
+          <ScalarProperty Name="kursEgitmenId" ColumnName="kursEgitmenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uye">
+      <EntityTypeMapping TypeName="TeknoAkademiDbModel.Uye">
+        <MappingFragment StoreEntitySet="Uye">
+          <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+          <ScalarProperty Name="uyeAd" ColumnName="uyeAd" />
+          <ScalarProperty Name="uyeSoyad" ColumnName="uyeSoyad" />
+          <ScalarProperty Name="uyeTel" ColumnName="uyeTel" />
+          <ScalarProperty Name="uyeMail" ColumnName="uyeMail" />
+          <ScalarProperty Name="uyeParola" ColumnName="uyeParola" />
+          <ScalarProperty Name="uyeYetki" ColumnName="uyeYetki" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

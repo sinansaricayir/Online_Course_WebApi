@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TeknoAkademiDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Egitmen">
+          <Key>
+            <PropertyRef Name="egitmenId" />
+          </Key>
+          <Property Name="egitmenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="egitmenAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="egitmenSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="egitmenBrans" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="egitmenOzgecmis" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="egitmenFotograf" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kurslar">
+          <Key>
+            <PropertyRef Name="kursId" />
+          </Key>
+          <Property Name="kursId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kursAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kursFiyat" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="kursIcerik" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="kursKategoriId" Type="int" Nullable="false" />
+          <Property Name="kursEgitmenId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uye">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uyeAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeTel" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="uyeMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeParola" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="uyeYetki" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Kurslar_EgitmenKurs">
+          <End Role="Egitmen" Type="Self.Egitmen" Multiplicity="1" />
+          <End Role="Kurslar" Type="Self.Kurslar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Egitmen">
+              <PropertyRef Name="egitmenId" />
+            </Principal>
+            <Dependent Role="Kurslar">
+              <PropertyRef Name="kursEgitmenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kurslar_KategoriKurs">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Kurslar" Type="Self.Kurslar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="Kurslar">
+              <PropertyRef Name="kursKategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TeknoAkademiDbModelStoreContainer">
+          <EntitySet Name="Egitmen" EntityType="Self.Egitmen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kurslar" EntityType="Self.Kurslar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uye" EntityType="Self.Uye" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kurslar_EgitmenKurs" Association="Self.FK_Kurslar_EgitmenKurs">
+            <End Role="Egitmen" EntitySet="Egitmen" />
+            <End Role="Kurslar" EntitySet="Kurslar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kurslar_KategoriKurs" Association="Self.FK_Kurslar_KategoriKurs">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Kurslar" EntitySet="Kurslar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TeknoAkademiDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Egitmen">
+          <Key>
+            <PropertyRef Name="egitmenId" />
+          </Key>
+          <Property Name="egitmenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="egitmenAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="egitmenSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="egitmenBrans" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="egitmenOzgecmis" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="egitmenFotograf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kurslar" Relationship="Self.FK_Kurslar_EgitmenKurs" FromRole="Egitmen" ToRole="Kurslar" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriId" />
+          </Key>
+          <Property Name="kategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kurslar" Relationship="Self.FK_Kurslar_KategoriKurs" FromRole="Kategori" ToRole="Kurslar" />
+        </EntityType>
+        <EntityType Name="Kurslar">
+          <Key>
+            <PropertyRef Name="kursId" />
+          </Key>
+          <Property Name="kursId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kursAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kursFiyat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="kursIcerik" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kursKategoriId" Type="Int32" Nullable="false" />
+          <Property Name="kursEgitmenId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Egitmen" Relationship="Self.FK_Kurslar_EgitmenKurs" FromRole="Kurslar" ToRole="Egitmen" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_Kurslar_KategoriKurs" FromRole="Kurslar" ToRole="Kategori" />
+        </EntityType>
+        <EntityType Name="Uye">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uyeAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeTel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeParola" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uyeYetki" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Kurslar_EgitmenKurs">
+          <End Role="Egitmen" Type="Self.Egitmen" Multiplicity="1" />
+          <End Role="Kurslar" Type="Self.Kurslar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Egitmen">
+              <PropertyRef Name="egitmenId" />
+            </Principal>
+            <Dependent Role="Kurslar">
+              <PropertyRef Name="kursEgitmenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kurslar_KategoriKurs">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+          <End Role="Kurslar" Type="Self.Kurslar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriId" />
+            </Principal>
+            <Dependent Role="Kurslar">
+              <PropertyRef Name="kursKategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TeknoAkademiDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Egitmen" EntityType="Self.Egitmen" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" />
+          <EntitySet Name="Kurslar" EntityType="Self.Kurslar" />
+          <EntitySet Name="Uye" EntityType="Self.Uye" />
+          <AssociationSet Name="FK_Kurslar_EgitmenKurs" Association="Self.FK_Kurslar_EgitmenKurs">
+            <End Role="Egitmen" EntitySet="Egitmen" />
+            <End Role="Kurslar" EntitySet="Kurslar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kurslar_KategoriKurs" Association="Self.FK_Kurslar_KategoriKurs">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Kurslar" EntitySet="Kurslar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TeknoAkademiDbModelStoreContainer" CdmEntityContainer="TeknoAkademiDbEntities">
+          <EntitySetMapping Name="Egitmen">
+            <EntityTypeMapping TypeName="TeknoAkademiDbModel.Egitmen">
+              <MappingFragment StoreEntitySet="Egitmen">
+                <ScalarProperty Name="egitmenId" ColumnName="egitmenId" />
+                <ScalarProperty Name="egitmenAd" ColumnName="egitmenAd" />
+                <ScalarProperty Name="egitmenSoyad" ColumnName="egitmenSoyad" />
+                <ScalarProperty Name="egitmenBrans" ColumnName="egitmenBrans" />
+                <ScalarProperty Name="egitmenOzgecmis" ColumnName="egitmenOzgecmis" />
+                <ScalarProperty Name="egitmenFotograf" ColumnName="egitmenFotograf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategori">
+            <EntityTypeMapping TypeName="TeknoAkademiDbModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="kategoriId" ColumnName="kategoriId" />
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kurslar">
+            <EntityTypeMapping TypeName="TeknoAkademiDbModel.Kurslar">
+              <MappingFragment StoreEntitySet="Kurslar">
+                <ScalarProperty Name="kursId" ColumnName="kursId" />
+                <ScalarProperty Name="kursAd" ColumnName="kursAd" />
+                <ScalarProperty Name="kursFiyat" ColumnName="kursFiyat" />
+                <ScalarProperty Name="kursIcerik" ColumnName="kursIcerik" />
+                <ScalarProperty Name="kursKategoriId" ColumnName="kursKategoriId" />
+                <ScalarProperty Name="kursEgitmenId" ColumnName="kursEgitmenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uye">
+            <EntityTypeMapping TypeName="TeknoAkademiDbModel.Uye">
+              <MappingFragment StoreEntitySet="Uye">
+                <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+                <ScalarProperty Name="uyeAd" ColumnName="uyeAd" />
+                <ScalarProperty Name="uyeSoyad" ColumnName="uyeSoyad" />
+                <ScalarProperty Name="uyeTel" ColumnName="uyeTel" />
+                <ScalarProperty Name="uyeMail" ColumnName="uyeMail" />
+                <ScalarProperty Name="uyeParola" ColumnName="uyeParola" />
+                <ScalarProperty Name="uyeYetki" ColumnName="uyeYetki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
